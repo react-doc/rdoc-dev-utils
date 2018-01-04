@@ -1,0 +1,23 @@
+{
+  "name": "rdoc-dev-utils",
+  "version": "1.0.0",
+  "description": "rdoc dev utils",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "address": "1.0.3",
+    "colors-cli": "1.0.9",
+    "cross-spawn": "5.1.0",
+    "detect-port-alt": "1.1.3",
+    "inquirer": "4.0.2",
+    "is-root": "1.0.0",
+    "loading-cli": "1.0.4",
+    "opn": "5.1.0",
+    "webpack-hot-dev-clients": "1.0.3"
+  }
+}
