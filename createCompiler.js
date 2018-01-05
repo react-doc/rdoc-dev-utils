@@ -89,9 +89,7 @@ function printDoneMessage(stats, isInteractive, isFirstCompile, appName, urls, u
   }
 }
 
-
-let isloading = true;
-
+const load = loading('Starting the development server...');
 function createCompiler(webpack, config, appName, urls, useYarn) {
   // "Compiler" is a low-level interface to Webpack.
   // It lets us listen to some events and provide our own custom messages.
@@ -105,10 +103,6 @@ function createCompiler(webpack, config, appName, urls, useYarn) {
     console.log();
     process.exit(1);
   }
-  const load = loading('Starting the development server...\n')
-  if (isloading) {
-    isloading = false;
-  }
 
   // "invalid" event fires when you have changed a file, and Webpack is
   // recompiling a bundle. WebpackDevServer takes care to pause serving the
@@ -118,23 +112,23 @@ function createCompiler(webpack, config, appName, urls, useYarn) {
     if (isInteractive) {
       clearConsole();
     }
-    load.start()
     load.text = ' Compiling...';
+    load.start();
   });
 
   let isFirstCompile = true;
   // "done" event fires when Webpack has finished recompiling the bundle.
   // Whether or not you have warnings or errors, you will get this event.
   compiler.plugin('done', stats => {
-    // if (isInteractive) {
-    //   // clearConsole();
-    // }
+    if (isInteractive) {
+      // clearConsole();
+    }
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
-      clearConsole();
       load.stop()
+      clearConsole();
       printDoneMessage(stats, isInteractive, isFirstCompile, appName, urls, useYarn)
-    },1000)
+    }, 1000)
 
   });
   return compiler;
